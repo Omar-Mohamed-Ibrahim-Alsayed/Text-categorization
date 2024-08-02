@@ -6,6 +6,7 @@ Dataset/IAM.zip
 Dataset/example.pdf
 Dataset/HW
 Dataset/PR
+Dataset/IAM
 
 DTrOCR
 Dataset/augmented_examples
@@ -14,3 +15,5 @@ Dataset/fonts
 Dataset/__pycache__
 MORAN/Dataset/H
 MORAN/Dataset/P
+MORAN/best_model.pth
+MORAN/checkpoints
