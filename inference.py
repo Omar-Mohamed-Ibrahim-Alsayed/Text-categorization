@@ -46,8 +46,8 @@ parser.add_argument('--canvas_size', default=1280, type=int, help='image size fo
 parser.add_argument('--mag_ratio', default=1.5, type=float, help='image magnification ratio')
 parser.add_argument('--poly', default=False, action='store_true', help='enable polygon type')
 parser.add_argument('--show_time', default=False, action='store_true', help='show processing time')
-parser.add_argument('--test_folder', default='./CRAFT/figures/', type=str, help='folder path to input images')
-parser.add_argument('--result_folder', default='./CRAFT/result/', type=str, help='folder path to save results')
+parser.add_argument('--test_folder', default='./inputs/', type=str, help='folder path to input images')
+parser.add_argument('--result_folder', default='./results/', type=str, help='folder path to save results')
 
 args = parser.parse_args()
 
