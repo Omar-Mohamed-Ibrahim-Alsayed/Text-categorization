@@ -12,6 +12,7 @@ DTrOCR
 Dataset/augmented_examples
 Dataset/printed_examples
 Dataset/fonts
+Dataset/IAM
 Dataset/__pycache__
 MORAN/Dataset/H
 MORAN/Dataset/P

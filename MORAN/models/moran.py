@@ -1,6 +1,6 @@
 import torch.nn as nn
-from models.morn import MORN
-from models.asrn_res import ASRN
+from MORAN.models.morn import MORN
+from MORAN.models.asrn_res import ASRN
 
 class MORAN(nn.Module):
     def __init__(self, nc, nclass, nh, targetH, targetW, BidirDecoder=False, 
