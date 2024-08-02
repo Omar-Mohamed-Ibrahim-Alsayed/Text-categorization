@@ -18,3 +18,5 @@ MORAN/Dataset/H
 MORAN/Dataset/P
 MORAN/best_model.pth
 MORAN/checkpoints
+weights/best_model.pth
+weights/craft_mlt_25k.pth

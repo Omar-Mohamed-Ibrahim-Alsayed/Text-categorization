@@ -36,8 +36,8 @@ def str2bool(v):
     return v.lower() in ("yes", "y", "true", "t", "1")
 
 parser = argparse.ArgumentParser(description='Text Extraction and Classification Pipeline')
-parser.add_argument('--craft_model', default='./CRAFT/weights/craft_mlt_25k.pth', type=str, help='CRAFT pretrained model')
-parser.add_argument('--moran_model', default='./MORAN/checkpoints/best_model.pth', type=str, help='MORAN pretrained model')
+parser.add_argument('--craft_model', default='./weights/craft_mlt_25k.pth', type=str, help='CRAFT pretrained model')
+parser.add_argument('--moran_model', default='./weights/best_model.pth', type=str, help='MORAN pretrained model')
 parser.add_argument('--text_threshold', default=0.7, type=float, help='text confidence threshold')
 parser.add_argument('--low_text', default=0.4, type=float, help='text low-bound score')
 parser.add_argument('--link_threshold', default=0.4, type=float, help='link confidence threshold')
