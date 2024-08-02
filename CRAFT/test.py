@@ -123,10 +123,13 @@ if __name__ == '__main__':
     # load net
     net = CRAFT()     # initialize
 
+
     print('Loading weights from checkpoint (' + args.trained_model + ')')
     if args.cuda:
+        print("Using Cuda")
         net.load_state_dict(copyStateDict(torch.load(args.trained_model)))
     else:
+        print("Using CPU")
         net.load_state_dict(copyStateDict(torch.load(args.trained_model, map_location='cpu')))
 
     if args.cuda:

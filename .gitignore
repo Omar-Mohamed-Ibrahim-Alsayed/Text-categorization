@@ -1,3 +1,16 @@
 CRAFT/figures
 CRAFT/result
 CRAFT/weights
+
+Dataset/IAM.zip
+Dataset/example.pdf
+Dataset/HW
+Dataset/PR
+
+DTrOCR
+Dataset/augmented_examples
+Dataset/printed_examples
+Dataset/fonts
+Dataset/__pycache__
+MORAN/Dataset/H
+MORAN/Dataset/P
