@@ -69,6 +69,11 @@ MORAN is initially trained on a large dataset for broad scene text recognition. 
 To adapt MORAN for the task of classifying text as either handwritten or printed, several modifications are made:
 1. **Pruning the Final Layer:** The final layer, originally designed for text recognition, is pruned or removed.
 2. **New Classification Layer:** A new classification layer is added, consisting of a fully connected layer with two output units (one for each class) and a softmax activation function to produce probabilities.
+<p align="center">
+<img src="training_validation_plots.png" alt="drawing"/>
+</p>
+<p align = "center">
+</p>
 
 ## Dataset
 For this assessment, a custom dataset was created using the following sources:
