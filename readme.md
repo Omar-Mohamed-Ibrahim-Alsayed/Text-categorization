@@ -5,12 +5,12 @@ Omar Mohammed Ibrahim Elsayed
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Pipeline Description](#pipeline-description)
-3. [Models](#models)
+2. [Usage](#usage)
+3. [Pipeline Description](#pipeline-description)
+4. [Models](#models)
     - [CRAFT](#craft)
     - [MORAN](#moran)
-4. [Dataset](#dataset)
-5. [User Guide](#user-guide)
+5. [Dataset](#dataset)
 6. [Examples](#examples)
 
 ## Introduction
