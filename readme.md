@@ -16,8 +16,8 @@ Omar Mohammed Ibrahim Elsayed
 ## Introduction
 This assessment entails creating a complex pipeline capable of detecting handwritten and printed text inside photographs. The major objective is to develop an accurate and efficient system for analyzing text in diverse document pictures and classifying it as handwritten or computer-generated. This work is critical for a variety of applications, including document digitization, automatic archiving, and improved document search functionality.
 <p align="center">
-  <img src="assets/example2.jpg" alt="Sample Input" width="45%" />
-  <img src="assets/example3.jpg" alt="Sample Output" width="45%" />
+  <img src="assets/input.png" alt="Sample Input" width="45%" />
+  <img src="assets/output.png" alt="Sample Output" width="45%" />
 </p>
 
 The main results from this assessment are:
@@ -74,7 +74,7 @@ To adapt MORAN for the task of classifying text as either handwritten or printed
 1. **Pruning the Final Layer:** The final layer, originally designed for text recognition, is pruned or removed.
 2. **New Classification Layer:** A new classification layer is added, consisting of a fully connected layer with two output units (one for each class) and a softmax activation function to produce probabilities.
 <p align="center">
-<img src="training_validation_plots.png" alt="drawing"/>
+<img src="assets/training_validation_plots.png" alt="drawing"/>
 </p>
 <p align = "center">
 </p>
