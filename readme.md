@@ -15,6 +15,10 @@ Omar Mohammed Ibrahim Elsayed
 
 ## Introduction
 This assessment entails creating a complex pipeline capable of detecting handwritten and printed text inside photographs. The major objective is to develop an accurate and efficient system for analyzing text in diverse document pictures and classifying it as handwritten or computer-generated. This work is critical for a variety of applications, including document digitization, automatic archiving, and improved document search functionality.
+<p align="center">
+  <img src="assets/example2.jpg" alt="Sample Input" width="45%" />
+  <img src="assets/example3.jpg" alt="Sample Output" width="45%" />
+</p>
 
 The main results from this assessment are:
 1. **Dataset:** A well-structured dataset containing labeled images of handwritten and printed text.
