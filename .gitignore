@@ -6,6 +6,8 @@ Dataset/IAM.zip
 Dataset/example.pdf
 Dataset/HW
 Dataset/PR
+Dataset/H
+Dataset/P
 Dataset/IAM
 
 DTrOCR
@@ -20,3 +22,5 @@ MORAN/best_model.pth
 MORAN/checkpoints
 weights/best_model.pth
 weights/craft_mlt_25k.pth
+weights/gn_model.pth
+weights/resnet_best_model.pth

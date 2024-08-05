@@ -17,6 +17,13 @@ from CRAFT import file_utils
 from collections import OrderedDict
 from MORAN.models.moran import MORAN
 from torchvision import transforms
+import warnings
+
+# Ignore specific warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning, module="torchvision")
+warnings.filterwarnings("ignore", category=FutureWarning, module="torch")
 
 # Load the CRAFT model and utility functions
 from CRAFT.craft import CRAFT

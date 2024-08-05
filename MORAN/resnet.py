@@ -4,18 +4,18 @@ import torch.optim as optim
 import torch.nn as nn
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
-from models.moran import MORAN
+from torchvision import transforms, models
 from dataset import HandwrittenPrintedDataset
-from torchvision import transforms
 
 # Check if CUDA is available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Define transforms
+# Define transforms (Resize to 224x224 for ResNet)
 transform = transforms.Compose([
-    transforms.Resize((32, 100)),
+    transforms.Grayscale(num_output_channels=3),  # Convert single-channel grayscale to 3-channel RGB
+    transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize((0.5,), (0.5,))
+    transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 ])
 
 # Load the dataset
@@ -30,17 +30,15 @@ val_dataset = torch.utils.data.Subset(dataset, val_idx)
 test_dataset = torch.utils.data.Subset(dataset, test_idx)
 
 # Create data loaders
-train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=4)
-val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, num_workers=4)
-test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False, num_workers=4)
+train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True, num_workers=4)
+val_loader = DataLoader(val_dataset, batch_size=16, shuffle=False, num_workers=4)
+test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False, num_workers=4)
 
 # Initialize the model
-model = MORAN(nc=1, nclass=2, nh=256, targetH=32, targetW=100)
+model = models.resnet152(weights=models.ResNet152_Weights.IMAGENET1K_V1)
+num_ftrs = model.fc.in_features
+model.fc = nn.Linear(num_ftrs, 2)  # 2 classes: handwritten and printed
 model = model.to(device)
-
-# Print the number of parameters in the model
-num_params = sum(p.numel() for p in model.parameters())
-print(f"Number of parameters in the model: {num_params}")
 
 # Define loss function and optimizer
 criterion = nn.CrossEntropyLoss()
@@ -49,12 +47,6 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 # Directory to save checkpoints
 checkpoint_dir = './checkpoints'
 os.makedirs(checkpoint_dir, exist_ok=True)
-
-# Load the saved model weights if they exist
-checkpoint_path = os.path.join(checkpoint_dir, 'best_model_new.pth')
-if os.path.isfile(checkpoint_path):
-    model.load_state_dict(torch.load(checkpoint_path))
-    print(f"Loaded checkpoint from {checkpoint_path}")
 
 # Variable to track the best validation loss
 best_val_loss = float('inf')
@@ -75,7 +67,7 @@ for epoch in range(num_epochs):
     for images, labels in train_loader:
         images, labels = images.to(device), labels.to(device)
         optimizer.zero_grad()
-        outputs = model(images, None, None, None, test=False)  # Training mode
+        outputs = model(images)
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
@@ -93,7 +85,7 @@ for epoch in range(num_epochs):
     with torch.no_grad():
         for images, labels in val_loader:
             images, labels = images.to(device), labels.to(device)
-            outputs = model(images, None, None, None, test=True)  # Test mode
+            outputs = model(images)
             loss = criterion(outputs, labels)
             val_loss += loss.item()
             val_accuracy += calculate_accuracy(outputs, labels)
@@ -105,6 +97,7 @@ for epoch in range(num_epochs):
     # Save the model checkpoint if validation loss has improved
     if avg_val_loss < best_val_loss:
         best_val_loss = avg_val_loss
+        checkpoint_path = os.path.join(checkpoint_dir, 'best_model.pth')
         torch.save(model.state_dict(), checkpoint_path)
         print(f"Model saved to {checkpoint_path}")
 
@@ -115,7 +108,7 @@ test_accuracy = 0.0
 with torch.no_grad():
     for images, labels in test_loader:
         images, labels = images.to(device), labels.to(device)
-        outputs = model(images, None, None, None, test=True)  # Test mode
+        outputs = model(images)
         loss = criterion(outputs, labels)
         test_loss += loss.item()
         test_accuracy += calculate_accuracy(outputs, labels)

@@ -37,7 +37,7 @@ def extract_text_from_pdf(pdf_path, max_samples=200):
 
 # Example usage
 pdf_path = 'example.pdf'  # Path to your PDF file
-text_samples = extract_text_from_pdf(pdf_path, max_samples=200)
+text_samples = extract_text_from_pdf(pdf_path, max_samples=2454)
 
 # Generate images
 for i, text in enumerate(text_samples):

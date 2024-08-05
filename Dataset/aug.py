@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageEnhance, ImageFilter, ImageOps
+from PIL import Image, ImageEnhance, ImageOps
 import random
 
 # Directory containing images
@@ -18,29 +18,32 @@ def apply_rgb_modifications(img, r_factor=1.0, g_factor=1.0, b_factor=1.0):
     b = ImageEnhance.Brightness(b).enhance(b_factor)
     return Image.merge('RGB', (r, g, b))
 
-def apply_blur(img, radius=2):
-    return img.filter(ImageFilter.GaussianBlur(radius))
+def apply_pixelization(img, pixel_size=10):
+    # Resize down
+    small = img.resize((img.size[0] // pixel_size, img.size[1] // pixel_size), resample=Image.NEAREST)
+    # Resize up
+    return small.resize(img.size, Image.NEAREST)
 
 def augment_image(image_path):
     with Image.open(image_path) as img:
         # Apply rotation
-        angle = random.randint(0, 360)
-        rotated_img = apply_rotation(img, angle)
+        #angle = random.randint(0, 360)
+        #rotated_img = apply_rotation(img, angle)
         
         # Apply RGB color modifications
         r_factor = random.uniform(0.5, 1.5)
         g_factor = random.uniform(0.5, 1.5)
         b_factor = random.uniform(0.5, 1.5)
-        rgb_modified_img = apply_rgb_modifications(rotated_img, r_factor, g_factor, b_factor)
+        rgb_modified_img = apply_rgb_modifications(img, r_factor, g_factor, b_factor)
         
-        # Apply blurring
-        blur_radius = random.uniform(0, 5)
-        blurred_img = apply_blur(rgb_modified_img, blur_radius)
+        # Apply pixelization
+        pixel_size = random.randint(1, 5)
+        pixelized_img = apply_pixelization(rgb_modified_img, pixel_size)
         
         # Save the augmented image
         base_name = os.path.basename(image_path)
         output_path = os.path.join(output_dir, f'augmented_{base_name}')
-        blurred_img.save(output_path)
+        pixelized_img.save(output_path)
 
 # Apply augmentations to all images in the input directory
 for image_file in os.listdir(input_dir):
